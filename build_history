@@ -9,9 +9,7 @@ cd
 git clone http://github.com/d-w-moore/ubuntu_irods_installer
 ubuntu_irods_installer/install.sh -h
 ubuntu_irods_installer/install.sh -C --w='config-essentials create-db add-package-repo'
-sudo apt install sudo
-sudo su -
-ubuntu_irods_installer/install.sh -C --w='config-essentials' #' create-db add-package-repo'
+ubuntu_irods_installer/install.sh -C --w=' add-build-externals '
 sudo service postgresql stop
 sudo service postgresql start
 ubuntu_irods_installer/install.sh -C --w=' create-db ' #' add-package-repo'
@@ -23,7 +21,6 @@ cd build__irods
 ls
 history
 ubuntu_irods_installer/install.sh  -h
-ubuntu_irods_installer/install.sh -C --w=' add-build-externals '
 PATH=/opt/irods-externals/cmake3.11.4-0/bin:$PATH
 which cmake
 cd github
