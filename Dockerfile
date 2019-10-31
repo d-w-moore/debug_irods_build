@@ -22,7 +22,7 @@ RUN git clone http://github.com/mozilla/rr && \
     make install
 # --
 #RUN apt-get update
-RUN apt-get install -y wget vim git sudo ctags
+RUN apt-get install -y wget vim git sudo exuberant-ctags cscope tmux
 RUN groupadd -g $GID $LOGIN
 RUN useradd -s /bin/bash -md /home/$LOGIN -g $GID -u $UID $LOGIN
 RUN echo "$LOGIN ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers

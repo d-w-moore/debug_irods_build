@@ -3,6 +3,10 @@ SCRIPTDIR=$(readlink -e "`dirname $0`")
 CONTAINER_DIR=/opt/irods-externals
 REMOVE_OPTION=""
 
+#
+# $0 [-rm] irods_builder_image volume_for_externals
+#
+
 while [[ $1 = -* ]]; do
   case ${1#-} in
     -rm|rm) REMOVE_OPTION="--rm"; shift;;
@@ -16,10 +20,13 @@ else
     MOUNT_W_OPTION=""
 fi
 
-#-v "$SCRIPTDIR"/github:/home/$USER/github  \
+# "--privileged" may be needed in some OSes for 
+#   'systemctl stop rsyslog' ('service rsyslog stop')
+
 docker run -it $REMOVE_OPTION \
 -v  /home/$USER/github:/home/$USER/github  \
   --cap-add=SYS_PTRACE \
   --security-opt seccomp=unconfined \
+  --privileged \
   $MOUNT_W_OPTION \
   "$1" bash
