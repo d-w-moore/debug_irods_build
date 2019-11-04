@@ -19,10 +19,10 @@ while [[ $1 = -* ]]; do
 done 
 
 [ -n "$QUIT" ] && {
- echo >&2 "GITHUB_PATH=""$GITHUB_PATH="
+ echo >&2 "GITHUB_PATH=""$GITHUB_PATH"
  exit 123;
 }
-exit 0
+#exit 0
 
 if [ $# -gt 1 ];then
     src="$2"
