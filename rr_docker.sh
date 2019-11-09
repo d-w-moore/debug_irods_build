@@ -10,8 +10,12 @@ VERBOSE=""
 # $0 [-rm] irods_builder_image volume_for_externals
 #
 usage() { echo "
- $0 [-rm] [-gh github_dir] -q -v -h\
+ $0 [-rm|--rm] [-gh github_dir] -q -v -x -docker_opts \"docker opts\"\
  irods_builder_image volume_for_externals
+
+   -- or --
+
+ $0  [-h|--help]
 "; } >&2
 
 while [[ $1 = -* ]]; do
@@ -22,6 +26,8 @@ while [[ $1 = -* ]]; do
     -gh|gh|-github|github) 
             GITHUB_PATH="$2"; shift 2;;
     -rm|rm) REMOVE_OPTION="--rm"; shift;;
+    -d|d|-docker_opts|docker_opts)  XTRA_DOCKER_OPTS="$2"; shift 2 ;;
+    *) echo >&2 "bad option(s) '$1'" ;exit 2;;
   esac
 done 
 
@@ -50,4 +56,5 @@ docker run -it $REMOVE_OPTION \
   --security-opt seccomp=unconfined \
   --privileged \
   $MOUNT_W_OPTION \
+  $XTRA_DOCKER_OPTS \
   "$1" bash
