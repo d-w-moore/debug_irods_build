@@ -28,8 +28,8 @@ RUN echo "$LOGIN ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 
 COPY db_commands.txt /
 WORKDIR /home/$login
-COPY build_history .
-RUN  chown $login:$login build_history
+#COPY build_history .
+#RUN  chown $login:$login build_history
 USER $login
 RUN git clone http://github.com/d-w-moore/ubuntu_irods_installer
 CMD ["/bin/bash"]
