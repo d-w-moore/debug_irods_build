@@ -7,6 +7,9 @@ ENV UID="$uid"
 ARG gid
 ENV GID="$gid"
 
+ARG commit="47f13a8"
+#ARG commit=""
+
 # -- rr
 RUN apt-get update && \
     apt-get install -y git vim gcc
@@ -16,7 +19,9 @@ RUN apt-get install -y ccache cmake make g++-multilib gdb pkg-config \
       libcapnp-dev
 
 RUN git clone http://github.com/mozilla/rr && \
-    mkdir obj && cd obj && \
+    cd rr && \
+    { [ -z "${commit}" ] || git checkout "${commit}"; } && \
+    mkdir ../obj && cd ../obj && \
     cmake ../rr && \
     make -j8 && \
     make install
