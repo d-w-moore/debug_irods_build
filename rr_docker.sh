@@ -5,6 +5,7 @@ REMOVE_OPTION=""
 GITHUB_PATH="$HOME/github"
 QUIT=""
 VERBOSE=""
+DKUSER="$USER"
 
 #
 # $0 [-rm] irods_builder_image volume_for_externals
@@ -27,6 +28,8 @@ while [[ $1 = -* ]]; do
     -h|h|-help|help) usage; exit 0 ;;
     -v|v|-verb*|verb*) VERBOSE="1";shift;;
     -q|q|-quit|quit) QUIT="1";shift;;
+    -u|u|-user|user) 
+            DKUSER="$2"; shift 2;;
     -gh|gh|-github|github) 
             GITHUB_PATH="$2"; shift 2;;
     -rm|rm) REMOVE_OPTION="--rm"; shift;;
@@ -59,7 +62,7 @@ fi
 #   'systemctl stop rsyslog' ('service rsyslog stop')
 
 docker run -it $REMOVE_OPTION \
--v  "$GITHUB_PATH:/home/$USER/github"  \
+-v  "$GITHUB_PATH:/home/$DKUSER/github"  \
   --cap-add=SYS_PTRACE \
   --security-opt seccomp=unconfined \
   --privileged \
