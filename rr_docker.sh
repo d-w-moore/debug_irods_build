@@ -10,8 +10,12 @@ VERBOSE=""
 # $0 [-rm] irods_builder_image volume_for_externals
 #
 usage() { echo "
- $0 [-rm|--rm] [-gh github_dir] -q -v -x -docker_opts \"docker opts\"\
- irods_builder_image volume_for_externals
+ $0 [-rm|--rm]
+    [-gh github_dir]
+    [-q|--quit]
+    [-v|--verbose]
+    [-docker_opts \"docker opts\"]
+    irods_builder_image volume_for_externals
 
    -- or --
 
@@ -45,6 +49,10 @@ if [ $# -gt 1 ];then
     MOUNT_W_OPTION="--mount src=$2,dst=$CONTAINER_DIR"
 else
     MOUNT_W_OPTION=""
+    if [ $# -lt 1 ] ; then
+       echo >&2 "Require one argument (the docker image name) or '-h'"
+       exit 3
+    fi
 fi
 
 # "--privileged" may be needed in some OSes for 
