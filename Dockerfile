@@ -35,9 +35,12 @@ RUN apt install -y bzip2
 WORKDIR /tmp
 RUN wget  https://sourceware.org/pub/valgrind/valgrind-3.15.0.tar.bz2
 RUN wget  http://ftp.gnu.org/gnu/gdb/gdb-8.3.1.tar.gz
-# for gdb manuals (otherwise refuses to install)
-RUN apt install -y texinfo
-RUN tar xzf gdb*gz && cd gdb*/ && ./configure --prefix=/usr/local/gdb && make -j7
+# texinfo     - so gdb can install info files (fails make install otherwise)
+# libncurses5 - for gdb TUI mode
+RUN apt install -y texinfo libncurses5 libncurses5-dev
+RUN tar xzf gdb*gz && cd gdb*/ \
+    && ./configure --prefix=/usr/local/gdb --with-curses --enable-tui \
+    && make -j3
 RUN mkdir /usr/local/gdb && cd gdb*/ && make install
 RUN tar xjf valgrind*bz2 && cd valgrind*/ && \
     ./configure --prefix=/usr/local/valgrind && \
