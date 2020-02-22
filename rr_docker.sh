@@ -12,7 +12,7 @@ DKUSER="$USER"
 #
 usage() { echo "
  $0 [-rm|--rm]
-    [-u user_in_gues_os]  (defaults to host username)
+    [-u user_in_guest_os]  (defaults to host username)
     [-gh github_dir]
     [-q|--quit]
     [-v|--verbose]
