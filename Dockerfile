@@ -46,7 +46,7 @@ RUN tar xjf valgrind*bz2 && cd valgrind*/ && \
     ./configure --prefix=/usr/local/valgrind && \
     mkdir /usr/local/valgrind && \
     make -j7 install
-
+RUN rm -fr /rr /obj /tmp/valgrind*/ /tmp/gdb*/
 COPY db_commands.txt /
 WORKDIR /home/$login
 #COPY build_history .
