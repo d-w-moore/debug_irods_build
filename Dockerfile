@@ -7,8 +7,10 @@ ENV UID="$uid"
 ARG gid
 ENV GID="$gid"
 
-ARG commit="47f13a8"
-#ARG commit=""
+ARG parallelism=3
+
+# "" to default to tip
+ARG rr_commit="47f13a8"  
 
 # -- rr
 RUN apt-get update && \
@@ -20,10 +22,10 @@ RUN apt-get install -y ccache cmake make g++-multilib gdb pkg-config \
 
 RUN git clone http://github.com/mozilla/rr && \
     cd rr && \
-    { [ -z "${commit}" ] || git checkout "${commit}"; } && \
+    { [ -z "${rr_commit}" ] || git checkout "${rr_commit}"; } && \
     mkdir ../obj && cd ../obj && \
     cmake ../rr && \
-    make -j8 && \
+    make -j${parallelism} && \
     make install
 
 RUN apt-get install -y wget vim git sudo exuberant-ctags cscope tmux
@@ -40,12 +42,12 @@ RUN wget  http://ftp.gnu.org/gnu/gdb/gdb-8.3.1.tar.gz
 RUN apt install -y texinfo libncurses5 libncurses5-dev
 RUN tar xzf gdb*gz && cd gdb*/ \
     && ./configure --prefix=/usr/local/gdb --with-curses --enable-tui \
-    && make -j3
+    && make -j${parallelism}
 RUN mkdir /usr/local/gdb && cd gdb*/ && make install
 RUN tar xjf valgrind*bz2 && cd valgrind*/ && \
     ./configure --prefix=/usr/local/valgrind && \
     mkdir /usr/local/valgrind && \
-    make -j7 install
+    make -j${parallelism} install
 RUN rm -fr /rr /obj /tmp/valgrind*/ /tmp/gdb*/
 COPY db_commands.txt /
 WORKDIR /home/$login
