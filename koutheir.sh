@@ -18,8 +18,7 @@ cd llvm-project && \
 apt install -y python  # apt remove -y python3
 
 git clone https://github.com/koutheir/libcxx-pretty-printers
+cd libcxx-pretty-printers && git checkout "5ffbf2487bf8da7f08bc1c8650a4396d2ff15403"
 
-: "
 PP_SRC_DIR=~/libcxx-pretty-printers/src
-ln -s $PP_SRC_DIR/gdbinit .gdbinit && sed -i.orig -e "s!<path.*>!$PP_SRC_DIR!" $PP_SRC_DIR/gdbinit
-"
+ln -s $PP_SRC_DIR/gdbinit .gdbinit && sed -i.orig -e "s@<path.*>@$PP_SRC_DIR@" $PP_SRC_DIR/gdbinit

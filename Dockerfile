@@ -21,7 +21,8 @@ COPY --from=debug_tools /usr/local/rr  /usr/local/rr
 COPY --from=debug_tools /usr/local/valgrind /usr/local/valgrind
 
 WORKDIR /home/$login
-COPY koutheir.sh /usr/local/ppmisc
+RUN  mkdir /usr/local/misc
+COPY koutheir.sh /usr/local/misc/.
 
 USER $login
 
