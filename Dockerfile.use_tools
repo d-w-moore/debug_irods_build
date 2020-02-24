@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 RUN apt update
-RUN apt install -y info libncurses5 g++ make
+RUN apt install -y info libncurses5 g++ make python
 RUN apt install -y vim
 
 RUN apt-get install -y g++-multilib gdb coreutils python3-pexpect capnproto 
