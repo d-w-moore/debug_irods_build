@@ -4,12 +4,15 @@ ARG parallelism=3
 
 RUN apt update
 RUN apt install -y texinfo libncurses5-dev g++ wget make
+RUN apt install -y python-dev
+RUN apt remove  -y python3-dev
+
 WORKDIR /tmp
 
 RUN wget http://ftp.gnu.org/gnu/gdb/gdb-8.3.1.tar.gz
 
 RUN tar xzf gdb*gz && cd gdb*/ \
-    && ./configure --prefix=/usr/local/gdb --with-curses --enable-tui \
+    && ./configure --prefix=/usr/local/gdb --with-python --with-curses --enable-tui \
     && make -j${parallelism}
 
 RUN mkdir /usr/local/gdb && cd gdb*/ && make install
