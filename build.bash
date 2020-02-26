@@ -1,7 +1,7 @@
 #!/bin/bash
 
 unset FORCE_TOOL_RECOMPILE
-TAGINFO=("-t" "debugger:latest")
+TAGINFO=("-t" "use_debuggers:latest")
 
 while getopts  ":t:fF" opt; do
     case $opt in
