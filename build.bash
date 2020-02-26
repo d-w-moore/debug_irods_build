@@ -14,7 +14,7 @@ done
 
 shift $((OPTIND-1))
 
-if [ "${FORCE_TOOL_RECOMPILE+.}" = "." -o `docker image ls -q debug_tools | wc -l` -lt 1 ]; then
+if [ "${FORCE_TOOL_RECOMPILE+.}" = "." -o `docker image ls -q build_debuggers | wc -l` -lt 1 ]; then
   $(dirname "$0")/bldtools.bash # - build rr,gdb,valgrind separately
 fi
 

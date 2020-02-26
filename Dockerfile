@@ -16,9 +16,9 @@ RUN useradd -s /bin/bash -md /home/$LOGIN -g $GID -u $UID $LOGIN
 RUN echo "$LOGIN ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 
 COPY db_commands.txt /
-COPY --from=debug_tools /usr/local/gdb /usr/local/gdb
-COPY --from=debug_tools /usr/local/rr  /usr/local/rr
-COPY --from=debug_tools /usr/local/valgrind /usr/local/valgrind
+COPY --from=build_debuggers /usr/local/gdb /usr/local/gdb
+COPY --from=build_debuggers /usr/local/rr  /usr/local/rr
+COPY --from=build_debuggers /usr/local/valgrind /usr/local/valgrind
 
 WORKDIR /home/$login
 RUN  mkdir /usr/local/misc
