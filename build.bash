@@ -18,5 +18,7 @@ if [ "${FORCE_TOOL_RECOMPILE+.}" = "." -o `docker image ls -q debug_tools | wc -
   $(dirname "$0")/bldtools.bash # - build rr,gdb,valgrind separately
 fi
 
-docker build --build-arg={login=`whoami`,uid=`id -u`,gid=`id -g`} "${TAGINFO[@]}" . "$@"
+BLDDIR=$(dirname "$0")
+cd  "$BLDDIR"
+docker build --build-arg={login=`whoami`,uid=`id -u`,gid=`id -g`} "${TAGINFO[@]}" "$@" .
 
