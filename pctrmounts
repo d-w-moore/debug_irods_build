@@ -1,0 +1,4 @@
+#!/bin/sh
+
+Pattern=${1:-"github|myvol"}
+for x in `docker ps -qa`; do echo == $x; docker inspect   $x|grep -E "$Pattern" ; done
