@@ -19,7 +19,7 @@ RUN mkdir /usr/local/gdb && cd gdb*/ && make install
 
 #--------
 
-ARG rr_commit=""  
+ARG rr_commit="4513b23c8092097dc42c73f3cbaf4cfaebd04efe"
 
 RUN apt-get install -y ccache cmake make g++-multilib gdb pkg-config \
       coreutils python3-pexpect manpages-dev git ninja-build capnproto \
