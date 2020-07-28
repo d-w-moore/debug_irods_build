@@ -8,7 +8,7 @@ ARG gid
 ENV GID="$gid"
 
 RUN apt-get update && \
-    apt-get install -y git vim make info libncurses5 g++ make \
+    apt-get install -y git vim make info libncurses5 g++ make libpython2.7 \
                      g++-multilib gdb coreutils python3-pexpect capnproto # for rr 
 RUN apt-get install -y wget vim git sudo exuberant-ctags cscope tmux
 RUN groupadd -g $GID $LOGIN
